@@ -75,12 +75,13 @@ class Controller(object):
 
 def launch(objects, host="0.0.0.0", port=12345, name="unnamed",
            server_cls=ThreadedServer,
-           server_kwargs=None):
+           server_kwargs=None,
+           register=True):
     service = provide_objects(Service, objects, name=name)
     if server_kwargs is None:
         server_kwargs = dict()
     server = server_cls(service=service,
-                        auto_register=True,
+                        auto_register=register,
                         hostname=host,
                         port=port,
                         **server_kwargs)
